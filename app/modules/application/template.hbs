@@ -1,0 +1,18 @@
+<div class='container'>
+	{{ph-button text=text outline=outline status=status isDisabled=isDisabled click=(action "myClick")}}
+
+	<div>
+		{{ph-button text='改变第一个按钮的Outline' click=(action "changeOutLine")}}
+
+		{{ph-button text='改变第一个按钮的Text' click=(action "changeText")}}
+
+		{{ph-button text='改变第一个按钮为Danger' click=(action "changeDanger")}}
+
+		{{ph-button text='改变第一个按钮为Warning' click=(action "changeWarning")}}
+
+		{{ph-button text='改变第一个按钮为Success' click=(action "changeSuccess")}}
+
+		{{ph-button text='是否禁用第一个按钮' click=(action "changeEnabled")}}
+	</div>
+
+</div>
