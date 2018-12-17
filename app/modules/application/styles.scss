@@ -1,0 +1,17 @@
+$content-bgcolor: #fafafa;
+
+html {
+    height: 100%;
+    background-color: $content-bgcolor;
+    font-size: 10px;
+}
+
+body {
+    height: 100%;
+    // font-family: $font-family !important;
+    // letter-spacing: $ph-letter-spacing-normal;
+
+    &> :global(.ember-view) {
+        height: 100%;
+    }
+}

@@ -1,7 +1,7 @@
 import PharbersAdapter from 'pharbers-emberbasis-library/adapters/phadapter';
 
 export default PharbersAdapter.extend({
-	namespace: '/',
+	namespace: '/api/',
 	init() {
 		this.set('headers', {
 			'dataType': 'json',

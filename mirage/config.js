@@ -23,8 +23,21 @@ export default function () {
 
 	  http://www.ember-cli-mirage.com/docs/v0.4.x/shorthands/
 	*/
+	this.namespace = '/api/';
 
-	this.post('/api/v1/userInfo', () => {
+	this.post('v1/login', (/*schema, request*/) => {
+		return {
+			"data": {
+				"type": "Auth",
+				"id": "1",
+				"attributes": {
+					"token": "X2kKidNVMWuA9DgnywUBxh43IQLf1EJe"
+				}
+			}
+		}
+	})
+
+	this.post('v1/userInfo', () => {
 		return {
 			"data": [{
 				"type": "UserInfo",

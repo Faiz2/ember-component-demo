@@ -16,7 +16,7 @@ export default Component.extend({
 
 	isDisabled: false,
 
-	display_status: computed('status', 'outline', function(){
+	display_status: computed('status', 'outline', function () {
 		let btnStyle = 'btn-';
 		this.get('outline') ? btnStyle += 'outline-' : btnStyle += '';
 
@@ -26,6 +26,7 @@ export default Component.extend({
 	classNames: ['btn'],
 	classNameBindings: ['display_status'],
 	attributeBindings: ['type', 'isDisabled:disabled'],
+
 	init() {
 		this._super(...arguments);
 	},
@@ -38,6 +39,7 @@ export default Component.extend({
 		this._super(...arguments);
 		window.console.info('属性改变时didUpdateAttrs 被触发了！！！');
 	},
+
 	actions: {
 
 	}
