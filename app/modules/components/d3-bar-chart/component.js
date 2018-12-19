@@ -1,6 +1,7 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { run } from '@ember/runloop';
-import ChartInitial from './d3ChartInitial';
+import ChartUtil from './d3ChartUtil';
 import { select } from 'd3-selection';
 import { max } from 'd3';
 
@@ -11,13 +12,14 @@ import { max } from 'd3';
 
 const { keys, values } = Object;
 
-export default Component.extend(ChartInitial, {
+export default Component.extend(ChartUtil, {
 	width: 1024,
 	height: 768,
 	bgColor: '#f5faf8',
 	title: '基本封装',
 	subTitle: '',
-	isShowText: true,
+	isShowText: false,
+	barWidth: 0,
 
 	localClassNames: 'd3-bar',
 
@@ -85,18 +87,18 @@ export default Component.extend(ChartInitial, {
 
 		mainChartOption = {
 			class: 'bar',
-			width: xScale.bandwidth(),
-			height: (d) => { return this.get('mainChartHight') - yScale(d[1]); },
-			x: (d) => { return xScale(d[0]); },
+			width: this.get('barWidth'),//xScale.bandwidth(),
+			height: (d) => { return this.get('height') - margin.top - margin.bottom - yScale(d[1]); },
+			x: (d) => { return xScale(d[0]) + xScale.bandwidth() / 2 - this.get('barWidth') + this.get('barWidth') / 2; },
 			y: (d) => { return yScale(d[1]); }
 		}
 
 		mainChartTextOption = {
 			class: 'barText',
 			'text-anchor': 'middle',
-			x: (d) => { return xScale(d[0]); },
+			x: (d) => { return xScale(d[0]) + xScale.bandwidth() / 2 - this.get('barWidth') + this.get('barWidth') / 2; },
 			y: (d) => { return yScale(d[1]); },
-			dx: xScale.bandwidth() / 2,
+			dx: this.get('barWidth') / 2,//xScale.bandwidth() / 2,
 			dy: 20
 		}
 

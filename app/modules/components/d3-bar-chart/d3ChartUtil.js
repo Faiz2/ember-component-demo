@@ -15,8 +15,6 @@ const setAttr = function (instance, option) {
 export default Mixin.create({
 	svgRoot: null,
 	gridContainer: null,
-	mainChartWidth: 0,
-	mainChartHight: 0,
 
 	initChart(elementId) {
 		this.set('svgRoot', select(`#${elementId}`).append('svg'));
@@ -61,7 +59,6 @@ export default Mixin.create({
 		let xScale = scaleBand().rangeRound([0, width]).padding(0.1),
 			xScaleInstance = this.get('gridContainer').append('g');
 
-		this.set('mainChartHight', width);
 		xScale.domain(xValues);
 
 		setAttr(xScaleInstance, option);
@@ -75,7 +72,6 @@ export default Mixin.create({
 		let yScale = scaleLinear().rangeRound([height, 0]),
 			yScaleInstance = this.get('gridContainer').append('g');
 
-		this.set('mainChartHight', height);
 		yScale.domain(yValues);
 
 		setAttr(yScaleInstance, option);
