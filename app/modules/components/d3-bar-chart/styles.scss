@@ -1,0 +1,14 @@
+.d3-bar {
+	font-size: 14px;
+
+	:global(.bar) {
+		border: 1px solid #0b3536;
+		border-radius: 6px;
+		fill: #0098d8;
+	}
+
+	:global(.barText) {
+		fill: #f5faf8;
+		font-weight: 500;
+	}
+}
