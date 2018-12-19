@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"bootstrap": "^4.0.0",
 		"broccoli-asset-rev": "^2.4.5",
+		"d3": "4.9.1",
 		"ember-ajax": "^3.0.0",
 		"ember-cli": "~2.18.2",
 		"ember-cli-app-version": "^3.0.0",
@@ -48,8 +49,9 @@
 		"ember-cli-sass": "^8.0.1",
 		"ember-css-modules": "^1.1.0",
 		"ember-css-modules-sass": "^1.0.1",
+		"ember-d3": "^0.5.0",
 		"ember-truth-helpers": "^2.1.0",
-		"pharbers-emberbasis-library": "*"
+		"pharbers-emberbasis-library": "^2.0.2"
 	},
 	"engines": {
 		"node": "^4.5 || 6.* || >= 7.*"
