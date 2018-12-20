@@ -30,6 +30,11 @@ export default Controller.extend({
 			},
 			rect: {
 				class: 'bar'
+			},
+			rectText: {
+				class: 'barText',
+				'text-anchor': 'middle',
+				dy: 20
 			}
 		});
 	},

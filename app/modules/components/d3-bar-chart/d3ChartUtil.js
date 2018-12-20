@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { select } from "d3-selection";
+import { select, selectAll } from "d3-selection";
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 
@@ -25,7 +25,7 @@ export default Mixin.create({
 	},
 
 	setGrid() {
-		let gridInstance = this.get('svgRoot').append('g').attr('id', 'grid');
+		let gridInstance = this.get('svgRoot').append('g').attr('tag', 'grid');
 
 		this.set('gridContainer', gridInstance);
 	},
@@ -43,7 +43,7 @@ export default Mixin.create({
 	},
 
 	setTitle(value) {
-		this.get('gridContainer').append('text').attr('id', 'title').text(value);
+		this.get('gridContainer').append('text').attr('tag', 'title').text(value);
 	},
 
 	setSubTitle(value) {
@@ -51,14 +51,14 @@ export default Mixin.create({
 	},
 
 	isShowMainChartTipText(chart, option) {
-		let text = chart.append('text').text((d) => { return d[1]; });
+		let text = chart.append('text').attr('tag', 'rectText').text((d) => { return d[1]; });
 
 		setAttr(text, option);
 	},
 
 	setXScale(width, xValues) {
 		let xScale = scaleBand().rangeRound([0, width]).padding(0.1),
-			xScaleInstance = this.get('gridContainer').append('g').attr('id', 'xScale');
+			xScaleInstance = this.get('gridContainer').append('g').attr('tag', 'xScale');
 
 		xScale.domain(xValues);
 
@@ -71,7 +71,7 @@ export default Mixin.create({
 
 	setYScale(height, yValues) {
 		let yScale = scaleLinear().rangeRound([height, 0]),
-			yScaleInstance = this.get('gridContainer').append('g').attr('id', 'yScale');
+			yScaleInstance = this.get('gridContainer').append('g').attr('tag', 'yScale');
 
 		yScale.domain(yValues);
 
@@ -83,7 +83,7 @@ export default Mixin.create({
 
 	setOption(ov = {}) {
 		keys(ov).forEach(key => {
-			let check = select(`#${this.get('elementId')} #${key}`);
+			let check = selectAll(`#${this.get('elementId')} [tag=${key}]`);
 			if (check.size() > 0) {
 				keys(ov[key]).forEach(attrKey => {
 					check.attr(attrKey, ov[key][attrKey]);
@@ -94,7 +94,7 @@ export default Mixin.create({
 
 	drawMainChart(dataSource, option) {
 		let chart = this.get('gridContainer').selectAll('bar').data(dataSource).enter().append('g'),
-			rect = chart.append('rect').attr('id', 'rect');
+			rect = chart.append('rect').attr('tag', 'rect');
 
 		setAttr(rect, option);
 

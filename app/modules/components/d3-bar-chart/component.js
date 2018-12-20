@@ -74,7 +74,6 @@ export default Component.extend(ChartUtil, {
 
 
 		mainChartOption = {
-			class: 'bar',
 			width: this.get('barWidth'),
 			height: (d) => { return this.get('height') - margin.top - margin.bottom - yScale(d[1]); },
 			x: (d) => { return xScale(d[0]) + xScale.bandwidth() / 2 - this.get('barWidth') + this.get('barWidth') / 2; },
@@ -82,12 +81,9 @@ export default Component.extend(ChartUtil, {
 		}
 
 		mainChartTextOption = {
-			class: 'barText',
-			'text-anchor': 'middle',
 			x: (d) => { return xScale(d[0]) + xScale.bandwidth() / 2 - this.get('barWidth') + this.get('barWidth') / 2; },
 			y: (d) => { return yScale(d[1]); },
-			dx: this.get('barWidth') / 2,//xScale.bandwidth() / 2,
-			dy: 20
+			dx: this.get('barWidth') / 2
 		}
 
 		mainChart = this.drawMainChart(
@@ -95,11 +91,10 @@ export default Component.extend(ChartUtil, {
 			mainChartOption
 		);
 
-		this.setOption(this.get('option'));
-
 		if (this.get('isShowText')) {
 			this.isShowMainChartTipText(mainChart, mainChartTextOption);
 		}
+		this.setOption(this.get('option'));
 
 		mainChart.on('mouseover', function () {
 			select(this).attr('opacity', 0.7);
