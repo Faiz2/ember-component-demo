@@ -39,7 +39,6 @@ export default Component.extend({
 		this._super(...arguments);
 		window.console.info('属性改变时didUpdateAttrs 被触发了！！！');
 	},
-
 	actions: {
 
 	}

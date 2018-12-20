@@ -1,0 +1,8 @@
+{{!-- {{outlet}} --}}
+<div local-class='bgc' style="background-color: {{backgroundColor}};">
+	<div local-class='card' class='menu'>
+		{{color-pick
+			currentColor=backgroundColor
+			change=(action (mut backgroundColor))}}
+	</div>
+</div>

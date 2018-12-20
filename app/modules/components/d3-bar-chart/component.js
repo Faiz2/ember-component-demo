@@ -24,7 +24,7 @@ export default Component.extend(ChartUtil, {
 		'chartOption'
 	],
 
-	option: computed('chartOption', function() {
+	option: computed('chartOption', function () {
 		return this.get('chartOption')
 	}),
 

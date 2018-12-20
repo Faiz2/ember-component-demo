@@ -1,0 +1,21 @@
+{{!-- {{yield}} --}}
+<div
+	local-class='square'
+	class='color'
+	style="background-color: {{currentColor}};">
+
+</div>
+
+{{#if isShowingPopup}}
+	{{#modal-dialog
+		container-class="Popup"
+		targetAttachment="middle right"
+		attachment="top left"
+		target=".menu" }}
+		{{#each colors as |color|}}
+			<div local-class="bar" style="background-color: {{color}};"
+				{{action change color}}>
+			</div>
+		{{/each}}
+	{{/modal-dialog}}
+{{/if}}

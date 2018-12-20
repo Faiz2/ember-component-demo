@@ -1,0 +1,22 @@
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
+.square {
+	position:absolute;
+	z-index: 52;
+	left:0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	width: 45px;
+	height: 45px;
+	background-color: white;
+	cursor: pointer;
+}
+.bar {
+	width: 100px;
+	height: 25px;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
