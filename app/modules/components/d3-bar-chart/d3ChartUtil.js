@@ -1,7 +1,8 @@
 import Mixin from '@ember/object/mixin';
-import { select } from 'd3-selection';
+import { select } from "d3-selection";
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
+
 
 
 const { keys } = Object;
@@ -15,15 +16,17 @@ const setAttr = function (instance, option) {
 export default Mixin.create({
 	svgRoot: null,
 	gridContainer: null,
+	xScaleInstance: null,
+	yScaleInstance: null,
 
 	initChart(elementId) {
+		this.set('elementId', elementId);
 		this.set('svgRoot', select(`#${elementId}`).append('svg'));
 	},
 
-	setGrid(option = {}) {
-		let gridInstance = this.get('svgRoot').append('g');
+	setGrid() {
+		let gridInstance = this.get('svgRoot').append('g').attr('id', 'grid');
 
-		setAttr(gridInstance, option);
 		this.set('gridContainer', gridInstance);
 	},
 
@@ -39,13 +42,11 @@ export default Mixin.create({
 		this.get('svgRoot').attr('height', value);
 	},
 
-	setTitle(value, option = {}) {
-		let textInstance = this.get('gridContainer').append('text').text(value);
-
-		setAttr(textInstance, option);
+	setTitle(value) {
+		this.get('gridContainer').append('text').attr('id', 'title').text(value);
 	},
 
-	setSubTitle(value, option = {}) {
+	setSubTitle(value) {
 
 	},
 
@@ -55,34 +56,45 @@ export default Mixin.create({
 		setAttr(text, option);
 	},
 
-	setXScale(width, xValues, option = {}) {
+	setXScale(width, xValues) {
 		let xScale = scaleBand().rangeRound([0, width]).padding(0.1),
-			xScaleInstance = this.get('gridContainer').append('g');
+			xScaleInstance = this.get('gridContainer').append('g').attr('id', 'xScale');
 
 		xScale.domain(xValues);
 
-		setAttr(xScaleInstance, option);
+		this.set('xScaleInstance', xScaleInstance);
 
 		xScaleInstance.call(axisBottom(xScale))
 
 		return xScale;
 	},
 
-	setYScale(height, yValues, option = {}) {
+	setYScale(height, yValues) {
 		let yScale = scaleLinear().rangeRound([height, 0]),
-			yScaleInstance = this.get('gridContainer').append('g');
+			yScaleInstance = this.get('gridContainer').append('g').attr('id', 'yScale');
 
 		yScale.domain(yValues);
 
-		setAttr(yScaleInstance, option);
+		// setAttr(yScaleInstance, option);
 
 		yScaleInstance.call(axisLeft(yScale).ticks(10))
 		return yScale;
 	},
 
+	setOption(ov = {}) {
+		keys(ov).forEach(key => {
+			let check = select(`#${this.get('elementId')} #${key}`);
+			if (check.size() > 0) {
+				keys(ov[key]).forEach(attrKey => {
+					check.attr(attrKey, ov[key][attrKey]);
+				})
+			}
+		})
+	},
+
 	drawMainChart(dataSource, option) {
 		let chart = this.get('gridContainer').selectAll('bar').data(dataSource).enter().append('g'),
-			rect = chart.append('rect');
+			rect = chart.append('rect').attr('id', 'rect');
 
 		setAttr(rect, option);
 

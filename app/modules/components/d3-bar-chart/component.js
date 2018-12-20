@@ -13,13 +13,20 @@ import { max } from 'd3';
 const { keys, values } = Object;
 
 export default Component.extend(ChartUtil, {
-	width: 1024,
-	height: 768,
-	bgColor: '#f5faf8',
-	title: '基本封装',
-	subTitle: '',
-	isShowText: false,
-	barWidth: 0,
+	positionalParams: [
+		'width',
+		'height',
+		'bgColor',
+		'title',
+		'isShowText',
+		'barWidth',
+		'gridAttr',
+		'chartOption'
+	],
+
+	option: computed('chartOption', function() {
+		return this.get('chartOption')
+	}),
 
 	localClassNames: 'd3-bar',
 
@@ -40,12 +47,9 @@ export default Component.extend(ChartUtil, {
 	},
 
 	initialize() {
-		let gridOption = null,
-			titleOption = null,
-			margin = null,
+		let margin = null,
 			xScaleValues = keys(this.get('data')),
 			yScaleValues = [0, max(values(this.get('data')))],
-			xScaleOption = null,
 			xScale = null,
 			yScale = null,
 			mainChart = null,
@@ -54,32 +58,16 @@ export default Component.extend(ChartUtil, {
 
 		margin = { top: 100, right: 20, bottom: 30, left: 30 };
 
-		gridOption = {
-			transform: `translate(${margin.left}, ${margin.top})`
-		};
-
-		titleOption = {
-			transform: `translate(${this.get('width') / 2}, -${margin.top / 2})`,
-			'text-anchor': 'middle',
-			'font-weight': 600
-		};
-
-		xScaleOption = {
-			transform: `translate(0, ${this.get('height') - margin.top - margin.bottom})`,
-			'font-weight': 'bold'
-		};
-
 		this.initChart(this.elementId);
 		this.setWidth(this.get('width'));
 		this.setHeight(this.get('height'));
 		this.setBackground(this.get('bgColor'));
-		this.setGrid(gridOption);
+		this.setGrid(this.get('gridOption'));
 
-		this.setTitle(this.get('title'), titleOption);
+		this.setTitle(this.get('title'));
 		xScale = this.setXScale(
 			this.get('width') - margin.left - margin.right,
-			xScaleValues,
-			xScaleOption);
+			xScaleValues);
 		yScale = this.setYScale(
 			this.get('height') - margin.top - margin.bottom,
 			yScaleValues);
@@ -87,7 +75,7 @@ export default Component.extend(ChartUtil, {
 
 		mainChartOption = {
 			class: 'bar',
-			width: this.get('barWidth'),//xScale.bandwidth(),
+			width: this.get('barWidth'),
 			height: (d) => { return this.get('height') - margin.top - margin.bottom - yScale(d[1]); },
 			x: (d) => { return xScale(d[0]) + xScale.bandwidth() / 2 - this.get('barWidth') + this.get('barWidth') / 2; },
 			y: (d) => { return yScale(d[1]); }
@@ -106,6 +94,8 @@ export default Component.extend(ChartUtil, {
 			keys(this.get('data')).map(key => [key, this.get('data')[key]]),
 			mainChartOption
 		);
+
+		this.setOption(this.get('option'));
 
 		if (this.get('isShowText')) {
 			this.isShowMainChartTipText(mainChart, mainChartTextOption);

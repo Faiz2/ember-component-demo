@@ -43,6 +43,7 @@
 		"sass": "^1.15.2"
 	},
 	"dependencies": {
+		"d3-selection-multi": "^1.0.1",
 		"ember-auto-import": "^1.2.19",
 		"ember-bootstrap": "^2.3.0",
 		"ember-cli-mirage": "^0.4.10",
