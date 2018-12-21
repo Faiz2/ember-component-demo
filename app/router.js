@@ -9,6 +9,8 @@ const Router = EmberRouter.extend({
 Router.map(function () {
   this.route('login');
   this.route('ddau');
+  this.route('button');
+  this.route('d3');
 });
 
 export default Router;

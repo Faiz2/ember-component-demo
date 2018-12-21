@@ -1,28 +1,8 @@
-{{!-- <div class='container'>
-	{{ph-button text=text outline=outline status=status isDisabled=isDisabled click=(action "myClick")}}
-
-	<div>
-		{{ph-button text='改变第一个按钮的Outline' click=(action "changeOutLine")}}
-
-		{{ph-button text='改变第一个按钮的Text' click=(action "changeText")}}
-
-		{{ph-button text='改变第一个按钮为Danger' click=(action "changeDanger")}}
-
-		{{ph-button text='改变第一个按钮为Warning' click=(action "changeWarning")}}
-
-		{{ph-button text='改变第一个按钮为Success' click=(action "changeSuccess")}}
-
-		{{ph-button text='是否禁用第一个按钮' click=(action "changeEnabled")}}
-	</div>
-
-</div> --}}
-{{!-- {{d3-bar-chart
-	title='哇咔咔'
-	width=600
-	height=360
-	barWidth=20
-	bgColor='#B0F566'
-	isShowText=true
-	chartOption=chartOption
-	}} --}}
-{{outlet}}
+<div class="container" style="height: 100%;">
+	{{#link-to "index" class='btn btn-primary' role='button'}}
+		返回
+	{{/link-to}}
+	<br>
+	<br>
+	{{outlet}}
+</div>

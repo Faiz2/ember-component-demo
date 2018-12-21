@@ -17,6 +17,8 @@ export default Component.extend({
 	isDisabled: false,
 
 	display_status: computed('status', 'outline', function () {
+		window.console.info('===>'+this.get('outline'));
+
 		let btnStyle = 'btn-';
 		this.get('outline') ? btnStyle += 'outline-' : btnStyle += '';
 
@@ -29,15 +31,18 @@ export default Component.extend({
 
 	init() {
 		this._super(...arguments);
+		window.console.info(this.get('outline'))
 	},
 	didReceiveAttrs() {
 		this._super(...arguments);
-		window.console.info(this.get('text'))
 		window.console.info('didReceiveAttrs 被触发了！！！');
 	},
 	didUpdateAttrs() {
 		this._super(...arguments);
 		window.console.info('属性改变时didUpdateAttrs 被触发了！！！');
+	},
+	didDestroyElement() {
+		window.console.info('组件销毁');
 	},
 	actions: {
 
