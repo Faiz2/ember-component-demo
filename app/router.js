@@ -11,6 +11,7 @@ Router.map(function () {
   this.route('ddau');
   this.route('button');
   this.route('d3');
+  this.route('alfred');
 });
 
 export default Router;
